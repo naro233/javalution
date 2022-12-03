@@ -4,23 +4,23 @@ import java.awt.*;
 import java.util.*;
 
 public class GameBoard {
-	private BoardBlock[][] gameBoard; // array that holds board
+	private Block[][] gameBoard; // array that holds board
 	private int tempRow;
     private int tempCol; 
 	private int row = 8; // 8 row
     private int col = 8; // 8 col
     private boolean darkBlock;
     
-    public Vector<BoardBlock> availablePieces = new Vector<BoardBlock>();
+    public Vector<Block> availablePieces = new Vector<Block>();
     
     public GameBoard() {
-    	gameBoard = new BoardBlock[row][col];
+    	gameBoard = new Block[row][col];
     	for(int i = 0; i < row; i++) { // loop through entire board
     		for(int j = 0; j < col; j++) {
     			if(darkBlock == true)
-    				gameBoard[i][j] = new BoardBlock(BoardBlock.BoardColor.DARKBLOCK, i, j);
+    				gameBoard[i][j] = new Block(Block.BoardColor.DARKBLOCK, i, j);
     			else if(darkBlock == false) // if not a dark block, draw a light block
-    				gameBoard[i][j] = new BoardBlock(BoardBlock.BoardColor.LIGHTBLOCK, i, j);
+    				gameBoard[i][j] = new Block(Block.BoardColor.LIGHTBLOCK, i, j);
     			darkBlock = !darkBlock; // alternate colors for j loop
     		}
     		darkBlock = !darkBlock; // alternate colors for i loop
@@ -28,23 +28,23 @@ public class GameBoard {
     	
     	for(int row = 0; row < 3; row++) // populate the game board with checkers
 			for(int col = 0; col < 8; col++)
-				if(getBlock(row, col).getBoardColor() == BoardBlock.BoardColor.DARKBLOCK)
+				if(getBlock(row, col).getBoardColor() == Block.BoardColor.DARKBLOCK)
 					getBlock(row,col).setChecker(new Checker(Color.BLACK, false, row, col));
 		for(int row = 5; row < 8; row++)
 			for(int col = 0; col < 8; col++)
-				if(getBlock(row, col).getBoardColor() == BoardBlock.BoardColor.DARKBLOCK)
+				if(getBlock(row, col).getBoardColor() == Block.BoardColor.DARKBLOCK)
 					getBlock(row,col).setChecker(new Checker(Color.RED, true, row, col));
     }      
    
-    public BoardBlock getBlock(int r, int c) { // checks if row/col is valid, if it is then it returns the gameboard
+    public Block getBlock(int r, int c) { // checks if row/col is valid, if it is then it returns the gameboard
         if(isValidMove(r, c) == true)
         	return gameBoard[r][c];
         else
         	return null; // invalid move
     }
    
-	public Vector<BoardBlock> getPossibleMoves(Checker c) {
-		Vector<BoardBlock> possibleMoves = new Vector<BoardBlock>();
+	public Vector<Block> getPossibleMoves(Checker c) {
+		Vector<Block> possibleMoves = new Vector<Block>();
 		Color tempColor = c.getColor();
 		tempRow = c.getRow();
 		tempCol = c.getCol();
@@ -138,20 +138,20 @@ public class GameBoard {
     }
  
 	public void loadMoveVector(Checker c) { 
-		Vector<BoardBlock> possibleMoves = getPossibleMoves(c);
-		for(BoardBlock highlight : possibleMoves)
+		Vector<Block> possibleMoves = getPossibleMoves(c);
+		for(Block highlight : possibleMoves)
 			highlight.selectBlock();
 	}
 	
 	public void clearMoveVector(Checker c) {
-		Vector<BoardBlock> possibleMoves = getPossibleMoves(c);
-		for(BoardBlock moves : possibleMoves)
+		Vector<Block> possibleMoves = getPossibleMoves(c);
+		for(Block moves : possibleMoves)
 			moves.clearBlock();
 	}
 	
-	public boolean moveChecker(BoardBlock start, BoardBlock end) {
+	public boolean moveChecker(Block start, Block end) {
 		Checker tempChecker = start.getPiece();
-		BoardBlock jumpBlock;
+		Block jumpBlock;
 		int jumpRow;
 		int jumpCol;
 		boolean jump = false;

@@ -1,4 +1,4 @@
-#Test2
+
 package pack;
 // Final Project by Ryan Winter rw15e for COP3252 Spring 17 5-3-17
 import java.util.*;
@@ -6,13 +6,13 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class Checkers implements ActionListener, MouseListener {
+public class Game implements ActionListener, MouseListener {
 	private int blackCount; // counter for black checkers
 	private int redCount; // counter for red checkers
 	private int winValue = 5;
 	private int currentPlayer; // will be a 0 if red and a 1 if black
 	private GameBoard gameBoard; // gameboard that holds all data
-	private BoardBlock clickedBlock;
+	private Block clickedBlock;
 	private boolean found; 
 	private boolean jump;
 	private JPanel gamePanel; 	// jpanel for game board
@@ -28,10 +28,10 @@ public class Checkers implements ActionListener, MouseListener {
 	private JFrame mainFrame; 	// the main frame that holds everything 
 
 	public static void main(String[] args) {
-		new Checkers(); // create new checkers object
+		new Game(); // create new checkers object
 		
 	}
-	public Checkers() {
+	public Game() {
 		playGame(); // set up and play the game
 		currentPlayer = 1; // start with red player
 		redCount = 12;
@@ -74,13 +74,13 @@ public class Checkers implements ActionListener, MouseListener {
 		for(int i = 0; i < 8; i++) { // loop through the full board creating blocks
 			for(int j = 0; j < 8; j++) {
 				JPanel ContainerPanel = new JPanel(new FlowLayout());
-				BoardBlock block = gameBoard.getBlock(i, j); 
+				Block block = gameBoard.getBlock(i, j); 
 				block.addMouseListener(this);
 				ContainerPanel.add(block); 
 				gamePanel.add(ContainerPanel);
-				if(block.getBoardColor() == BoardBlock.BoardColor.DARKBLOCK)
+				if(block.getBoardColor() == Block.BoardColor.DARKBLOCK)
 					ContainerPanel.setBackground(new Color(139,69,19)); // darker brown
-				else if(block.getBoardColor() == BoardBlock.BoardColor.LIGHTBLOCK)
+				else if(block.getBoardColor() == Block.BoardColor.LIGHTBLOCK)
 					ContainerPanel.setBackground(new Color(244,164,96)); // light brown 
 			}
 		}
@@ -99,11 +99,11 @@ public class Checkers implements ActionListener, MouseListener {
 		return 5;
 	}
 	public void mouseClicked(MouseEvent e) {
-		BoardBlock clicked = (BoardBlock)e.getComponent();
+		Block clicked = (Block)e.getComponent();
 		if (clicked.isTaken() == true && clicked.getPiece().getCurrentPlayer() != currentPlayer) // 0 for black 1 for red
 			return;
 
-		for (BoardBlock h : gameBoard.availablePieces) {
+		for (Block h : gameBoard.availablePieces) {
 			System.out.print("hi");
 			h.clearBlock();
 			h.drawAvailable();
@@ -124,7 +124,7 @@ public class Checkers implements ActionListener, MouseListener {
 			}
 		}
 		else if(clicked.isTaken() == false) { // jump
-			Vector<BoardBlock> oldPossibleMoves = gameBoard.getPossibleMoves(clickedBlock.getPiece());
+			Vector<Block> oldPossibleMoves = gameBoard.getPossibleMoves(clickedBlock.getPiece());
 			found = false;
 			jump = false;	
 			checkMove(clicked);
@@ -135,7 +135,7 @@ public class Checkers implements ActionListener, MouseListener {
 					else
 						blackCount--;
 				}
-				for (BoardBlock unhighlight : oldPossibleMoves)
+				for (Block unhighlight : oldPossibleMoves)
 					unhighlight.clearBlock();
 				clickedBlock.clearBlock(); 
 				clickedBlock = null;
@@ -188,9 +188,9 @@ public class Checkers implements ActionListener, MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-	public void checkMove(BoardBlock b) {
-		Vector<BoardBlock> oldPossibleMoves = gameBoard.getPossibleMoves(clickedBlock.getPiece());
-		for(BoardBlock selection : oldPossibleMoves) {
+	public void checkMove(Block b) {
+		Vector<Block> oldPossibleMoves = gameBoard.getPossibleMoves(clickedBlock.getPiece());
+		for(Block selection : oldPossibleMoves) {
 			if(selection.equals(b)) {
 				jump = gameBoard.moveChecker(clickedBlock, b);
 				found = true;

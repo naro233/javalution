@@ -2,7 +2,7 @@ package pack;
 // Final Project by Ryan Winter rw15e for COP3252 Spring 17 5-3-17
 import java.awt.*;
 
-public class BoardBlock extends Canvas {
+public class Block extends Canvas {
 	private static final long serialVersionUID = 1L;
 	private Checker piece;
 	//private int currentPlayer;
@@ -12,7 +12,7 @@ public class BoardBlock extends Canvas {
 	private BoardColor background; 
     private boolean taken; // if block is already taken
     private boolean available;
-    public BoardBlock(BoardColor c, int r1, int c1) {
+    public Block(BoardColor c, int r1, int c1) {
     	this.setSize(50, 50); // set size of the BoardBlock
     	this.row = r1;
     	this.col = c1;
@@ -43,7 +43,7 @@ public class BoardBlock extends Canvas {
    // 	return currentPlayer;
    // }
     
-    public BoardBlock.BoardColor getBoardColor() {
+    public Block.BoardColor getBoardColor() {
     	return this.background;
     }
     
@@ -86,9 +86,9 @@ public class BoardBlock extends Canvas {
     }
 
 	public void paint(Graphics g) {
-		if(this.getBoardColor() == BoardBlock.BoardColor.LIGHTBLOCK)
+		if(this.getBoardColor() == Block.BoardColor.LIGHTBLOCK)
 			this.setBackground(new Color(244,164,96)); // light brown
-		else if(this.getBoardColor() == BoardBlock.BoardColor.DARKBLOCK)
+		else if(this.getBoardColor() == Block.BoardColor.DARKBLOCK)
 			this.setBackground(new Color(139,69,19)); // darker brown
 		if(this.isTaken() == true){
 			g.setColor(piece.getColor()); 
