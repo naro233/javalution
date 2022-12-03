@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 // JAVALUTION TEST
-public class SaveData implements java.io.Serializable {
+public class DataManager implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
     public GameBoard savedBoard;
