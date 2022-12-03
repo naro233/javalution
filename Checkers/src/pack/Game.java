@@ -106,7 +106,6 @@ public class Game implements ActionListener, MouseListener {
 		for (Block h : gameBoard.availablePieces) {
 			System.out.print("hi");
 			h.clearBlock();
-			h.drawAvailable();
 		}
 		if(clicked.isTaken() == true){	// highlight new block
 			if(clickedBlock == null){

@@ -58,7 +58,7 @@ public class GameBoard {
 					if(c.getRow() == 7 && c.getCol() == i)
 						c.King = true;
 		}
-		if(c.King == true){ // if Checker is a king it needs to be able to move up and down GameBoard
+		if(c.King == false){ // if Checker is a king it needs to be able to move up and down GameBoard
 			for(int i = 1; i < 2; i++){
 				if(GameBoard.isValidMove(tempRow+i, tempCol+i) == true) { // check bottom right
 					if(this.getBlock(tempRow+i, tempCol+i).isTaken() == false)

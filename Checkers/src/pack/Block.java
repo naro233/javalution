@@ -11,7 +11,6 @@ public class Block extends Canvas {
 	public enum BoardColor { DARKBLOCK, LIGHTBLOCK, NULL }; 
 	private BoardColor background; 
     private boolean taken; // if block is already taken
-    private boolean available;
     public Block(BoardColor c, int r1, int c1) {
     	this.setSize(50, 50); // set size of the BoardBlock
     	this.row = r1;
@@ -28,10 +27,6 @@ public class Block extends Canvas {
         return this.taken;
     }
 
-    public boolean isAvailable() { 
-        return this.available;
-    }
-    
     public int getRow() {
     	return this.row;
     }
@@ -62,13 +57,7 @@ public class Block extends Canvas {
     		//currentPlayer++;
     	}
     }
-    public void drawAvailable() {
 
-    	Graphics g = this.getGraphics();
-		g.setColor(Color.YELLOW); 
-   		//g.drawRect(0, 0, 48, 48); // draw green rectangle around selected block
-   		g.drawOval(0, 0, 49, 49);
-    }
     public void selectBlock() {
     	Graphics g = this.getGraphics();
 	   	if(this.isTaken() == true) {	

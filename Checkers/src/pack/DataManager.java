@@ -13,7 +13,6 @@ public class DataManager implements java.io.Serializable {
     public GameBoard savedBoard;
     public int savedCurrentPlayer;
     
-
     public static void save(Serializable data, String fileName) throws Exception {
         try (ObjectOutputStream outStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
         	outStream.writeObject(data);
