@@ -1,17 +1,16 @@
 package pack;
 // JAVALUTION TEST
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 
-public class GameBoard {
+public class GameBoard implements Serializable{
 	private Block[][] gameBoard; // array that holds board
 	private int tempRow;
     private int tempCol; 
 	private int row = 8; // 8 row
     private int col = 8; // 8 col
     private boolean darkBlock;
-    
-    public Vector<Block> availablePieces = new Vector<Block>();
     
     public GameBoard() {
     	gameBoard = new Block[row][col];
@@ -66,8 +65,6 @@ public class GameBoard {
 					else // check jump
 						if(GameBoard.isValidMove(tempRow+(i+1), tempCol+(i+1)) == true && this.getBlock(tempRow+(i+1), tempCol+(i+1)).isTaken() == false)
 								possibleMoves.add(this.getBlock(tempRow+(i+1), tempCol+(i+1)));
-
-					availablePieces.add(this.getBlock(tempRow, tempCol));
 				}
 				if(GameBoard.isValidMove(tempRow-i, tempCol+i) == true) { // check top right
 					if(this.getBlock(tempRow-i, tempCol+i).isTaken() == false)
@@ -75,7 +72,6 @@ public class GameBoard {
 					else // check jump
 						if(GameBoard.isValidMove(tempRow-(i+1), tempCol+(i+1)) == true && this.getBlock(tempRow-(i+1), tempCol+2).isTaken() == false)
 								possibleMoves.add(this.getBlock(tempRow-(i+1), tempCol+(i+1)));
-					availablePieces.add(this.getBlock(tempRow, tempCol));
 				}
 				if(GameBoard.isValidMove(tempRow+i, tempCol-i) == true) { // check bottom left
 					if(this.getBlock(tempRow+i, tempCol-i).isTaken() == false)
@@ -83,7 +79,6 @@ public class GameBoard {
 					else // check jump
 						if(GameBoard.isValidMove(tempRow+(i+1), tempCol-(i+1)) == true && this.getBlock(tempRow+(i+1), tempCol-(i+1)).isTaken() == false)
 								possibleMoves.add(this.getBlock(tempRow+(i+1), tempCol-(i+1)));
-					availablePieces.add(this.getBlock(tempRow, tempCol));
 				}
 				if(GameBoard.isValidMove(tempRow-i, tempCol-i) == true) { // check top left
 					if(this.getBlock(tempRow-i, tempCol-i).isTaken() == false)
@@ -91,7 +86,6 @@ public class GameBoard {
 					else // check jump
 						if(GameBoard.isValidMove(tempRow-(i+1), tempCol-(i+1)) == true && this.getBlock(tempRow-(i+1), tempCol-(i+1)).isTaken() == false)
 								possibleMoves.add(this.getBlock(tempRow-(i+1), tempCol-(i+1)));
-					availablePieces.add(this.getBlock(tempRow, tempCol));
 				}
 			}			
 		} // end of if king

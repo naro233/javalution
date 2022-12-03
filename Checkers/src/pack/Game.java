@@ -64,7 +64,7 @@ public class Game implements ActionListener, MouseListener {
 
 		gameMenu = new JMenu("Game");
 		saveGame = new JMenuItem("Save Game");
-		newGame.addActionListener(this);
+		saveGame.addActionListener(this);
 		loadGame = new JMenuItem("Load Game");
 		loadGame.addActionListener(this);
 		gameMenu.add(saveGame);
@@ -103,10 +103,6 @@ public class Game implements ActionListener, MouseListener {
 		if (clicked.isTaken() == true && clicked.getPiece().getCurrentPlayer() != currentPlayer) // 0 for black 1 for red
 			return;
 
-		for (Block h : gameBoard.availablePieces) {
-			System.out.print("hi");
-			h.clearBlock();
-		}
 		if(clicked.isTaken() == true){	// highlight new block
 			if(clickedBlock == null){
 				clickedBlock = clicked;
@@ -203,10 +199,15 @@ public class Game implements ActionListener, MouseListener {
 		}
 		else if (e.getSource() == saveGame){
 			DataManager data = new DataManager();
-            data.savedBoard = gameBoard;
+           
+			//GameBoard data = gameBoard;
+			data.savedBoard = gameBoard;
             data.savedCurrentPlayer = currentPlayer;
+            System.out.print("tryy");
+            //DataManager dataManager = new DataManager();
+			
             try {
-                DataManager.save(data, "1.save");
+                data.save(gameBoard, "1.save");
             }
             catch (Exception e2) {
                 System.out.println("Failed to save: " + e2.getMessage());
@@ -214,8 +215,8 @@ public class Game implements ActionListener, MouseListener {
 		}
 		else if (e.getSource() == loadGame){
 			try {
-                DataManager data = (DataManager)DataManager.load("1.save");
-                // gameBoard.setText(data.savedBoard);
+				GameBoard  data = (GameBoard)DataManager.load("1.save");
+                gameBoard = data;
                 // currentPlayer.setValue(data.savedCurrentPlayer);
                 // currentPlayer.setText(data.savedCurrentPlayer);
                 //currentPlayer.(data.savedCurrentPlayer);
