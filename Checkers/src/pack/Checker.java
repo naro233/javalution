@@ -1,5 +1,4 @@
 package pack;
-// JAVALUTION TEST
 import java.awt.*;
 
 public class Checker {

@@ -1,5 +1,4 @@
 package pack;
-// JAVALUTION TEST
 import java.awt.*;
 import java.io.Serializable;
 import java.util.*;
@@ -48,16 +47,16 @@ public class GameBoard implements Serializable{
 		tempRow = c.getRow();
 		tempCol = c.getCol();
 		if(c.color == Color.RED){
-			for(int i = 0; i < 8; i++)
-					if(c.getRow() == 0 && c.getCol() == i)
-						c.King = true;
+			if(c.getRow() == 0) {
+				c.King = true;
+			}
 		}
 		if(c.color == Color.BLACK){
-			for(int i = 0; i < 8; i++)
-					if(c.getRow() == 7 && c.getCol() == i)
-						c.King = true;
+			if(c.getRow() == 7) {
+				c.King = true;
+			}
 		}
-		if(c.King == false){ // if Checker is a king it needs to be able to move up and down GameBoard
+		if(c.King == true){ // if Checker is a king it needs to be able to move up and down GameBoard
 			for(int i = 1; i < 2; i++){
 				if(GameBoard.isValidMove(tempRow+i, tempCol+i) == true) { // check bottom right
 					if(this.getBlock(tempRow+i, tempCol+i).isTaken() == false)
