@@ -207,7 +207,7 @@ public class Game implements ActionListener, MouseListener {
             data.savedBoard = gameBoard;
             data.savedCurrentPlayer = currentPlayer;
             try {
-                ResourceManager.save(data, "1.save");
+                SaveData.save(data, "1.save");
             }
             catch (Exception e2) {
                 System.out.println("Failed to save: " + e2.getMessage());
@@ -215,7 +215,7 @@ public class Game implements ActionListener, MouseListener {
 		}
 		else if (e.getSource() == loadGame){
 			try {
-                SaveData data = (SaveData)ResourceManager.load("1.save");
+                SaveData data = (SaveData)SaveData.load("1.save");
                 // gameBoard.setText(data.savedBoard);
                 // currentPlayer.setValue(data.savedCurrentPlayer);
                 // currentPlayer.setText(data.savedCurrentPlayer);
